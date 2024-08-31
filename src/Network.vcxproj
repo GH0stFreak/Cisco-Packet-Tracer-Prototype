@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="test.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="class\arpCache\arpCache.h" />
+    <ClInclude Include="class\client\client.h" />
+    <ClInclude Include="class\common.h" />
+    <ClInclude Include="class\cpu.h" />
+    <ClInclude Include="class\deviceWindow.h" />
+    <ClInclude Include="class\device\device.h" />
+    <ClInclude Include="class\dhcpTable\dhcpTable.h" />
+    <ClInclude Include="class\dhcp\dhcp.h" />
+    <ClInclude Include="class\enums.h" />
+    <ClInclude Include="class\functions\sendARPReply.h" />
+    <ClInclude Include="class\global.h" />
+    <ClInclude Include="class\headers.h" />
+    <ClInclude Include="class\helper.h" />
+    <ClInclude Include="class\interface\clientIface.h" />
+    <ClInclude Include="class\interface\dhcpIface.h" />
+    <ClInclude Include="class\interface\interface.h" />
+    <ClInclude Include="class\interface\routerIface.h" />
+    <ClInclude Include="class\interface\serverIface.h" />
+    <ClInclude Include="class\interface\switchIface.h" />
+    <ClInclude Include="class\layer2\layer2.h" />
+    <ClInclude Include="class\layer3\layer3.h" />
+    <ClInclude Include="class\layer4\layer4.h" />
+    <ClInclude Include="class\layer5\layer5.h" />
+    <ClInclude Include="class\logger.h" />
+    <ClInclude Include="class\macTable\macTable.h" />
+    <ClInclude Include="class\pcapWriter.h" />
+    <ClInclude Include="class\protocol.h" />
+    <ClInclude Include="class\router\router.h" />
+    <ClInclude Include="class\routingTable\routingTable.h" />
+    <ClInclude Include="class\stopThread.h" />
+    <ClInclude Include="class\switch\switch.h" />
+    <ClInclude Include="class\tscircularptrqueue.h" />
+    <ClInclude Include="class\tscircularqueue.h" />
+    <ClInclude Include="class\utils.h" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{8F6A0D6C-FB49-8C07-0462-17DE70C0F268}</ProjectGuid>
+    <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>Network</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>..\build\Debug\bin\</OutDir>
+    <IntDir>..\build\Debug\obj\</IntDir>
+    <TargetName>Network</TargetName>
+    <TargetExt>.exe</TargetExt>
+    <ExecutablePath>$(ProjectDir)..\..\..\..\..\..\.conan2\p\b\fmt97a8ce6146394\p\bin;$(ProjectDir)..\..\..\..\..\..\.conan2\p\b\spdlocc2ebcb4e6623\p\bin;$(ExecutablePath)</ExecutablePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>..\build\Release\bin\</OutDir>
+    <IntDir>..\build\Release\obj\</IntDir>
+    <TargetName>Network</TargetName>
+    <TargetExt>.exe</TargetExt>
+    <ExecutablePath>$(ProjectDir)..\..\..\..\..\..\.conan2\p\fmta98cbeb106603\p\bin;$(ProjectDir)..\..\..\..\..\..\.conan2\p\spdloa736e9ace9ccd\p\bin;$(ExecutablePath)</ExecutablePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>DEBUG;SPDLOG_FMT_EXTERNAL;SPDLOG_COMPILED_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\..\..\..\..\.conan2\p\b\fmt97a8ce6146394\p\include;..\..\..\..\..\..\.conan2\p\b\spdlocc2ebcb4e6623\p\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>fmtd.lib;spdlogd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\..\..\..\..\.conan2\p\b\fmt97a8ce6146394\p\lib;..\..\..\..\..\..\.conan2\p\b\spdlocc2ebcb4e6623\p\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>/IGNORE:4099 %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>NDEBUG;SPDLOG_FMT_EXTERNAL;SPDLOG_COMPILED_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\..\..\..\..\.conan2\p\fmta98cbeb106603\p\include;..\..\..\..\..\..\.conan2\p\spdloa736e9ace9ccd\p\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <StringPooling>true</StringPooling>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>fmt.lib;spdlog.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\..\..\..\..\.conan2\p\fmta98cbeb106603\p\lib;..\..\..\..\..\..\.conan2\p\spdloa736e9ace9ccd\p\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>/IGNORE:4099 %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
