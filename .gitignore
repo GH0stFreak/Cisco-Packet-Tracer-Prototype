@@ -8,6 +8,8 @@ dependencies/
 build/
 src/pcap/
 
+*.sln
+
 # User-specific files
 *.rsuser
 *.suo
