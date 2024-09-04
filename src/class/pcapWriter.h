@@ -1,3 +1,6 @@
+// https://infocenter.nokia.com/public/7705SAR234R1A/index.jsp?topic=%2Fcom.nokia.oam-guide%2Fpcap_file_forma-ai9o99jjsa.html
+// https://www.ietf.org/archive/id/draft-gharris-opsawg-pcap-01.html
+
 
 #pragma once
 #include "common.h"
