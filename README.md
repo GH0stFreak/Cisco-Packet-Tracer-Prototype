@@ -46,6 +46,25 @@
 python ./init.py
 ```
 
+# Commands used
+
+- ipconfig - Tells the IP assigned
+- ipconfig /renew - Sends DHCP Discover and starts the DORA handshakes for IP, Mask & DNS
+- ping \<ip> - Sends ICMP ping (Get the ip using ipconfig)
+- arp \<ip> - Sends ARP request (Get the ip using ipconfig)
+- show mac address-table - Shows entries in mac table
+- show ip route - Shows routing table
+- show ip arp - Shows Arp table
+- show spanning-tree - Shows the switch interfaces status
+- hostname \<text> - Change the hostname of device
+- stp timer forward-delay time \<number> - Set the forawrd delay on switch (Default should be 15 but have changed it in the code for faster start up time)
+- stp timer hello time \<number> - Set the hello timer on switch
+- stp timer max-age time \<number> - Set the max age for STP packets on switch
+
+# In progress Commands
+
+- ipconfig /release - For now unassigns the IP already assigned but still need to work on the actual process as the device needs to send a DHCP packet type of "DHCPRELEASE" but not still implemented
+
 ## What are the bad practices used
 
 1. I was pretty new to C++ so there is a lot of stack memory used instead of heap because I was pretty much scared of not handling the allocated memory.
