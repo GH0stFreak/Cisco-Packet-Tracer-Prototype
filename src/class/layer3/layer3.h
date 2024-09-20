@@ -42,11 +42,6 @@ struct Icmp_pkt_status {
 
 };
 
-//template <typename T, typename U>
-//class RouterIface;
-// template <typename T>
-// class Layer3 : public Layer2<T> {
-
 class Layer3 : public Layer2 {
 public:
   
@@ -210,8 +205,6 @@ void addIPv4Header(std::deque<uint8_t> &packet, uint8_t hl, PROTOCOL::ip_protoco
 
   PROTOCOL::ipv4_hdr ipv4_hdr(hl,size+hl,(uint8_t)type,ip_src,ip_dst,ip_id);
   // ipv4_hdr.display();
-	// std::cout<<"Len: "<<+(size+hl)<<std::endl;
-	// std::cout<<"Len: "<<+ipv4_hdr.ip_len<<std::endl;
 	
   std::list<uint8_t> temp;
   ipv4_hdr.serialize(temp);
@@ -225,12 +218,6 @@ void addIPv4Header(std::deque<uint8_t> &packet, uint8_t hl, PROTOCOL::ip_protoco
   *it = checksum>>8;
   std::advance(it, 1);
   *it = checksum&0xFF;
-
-	// std::cout << "Checksum" << std::to_string(checksum) << std::endl; 
-	// for (auto i : temp) {
-  //       std::cout << +i << ' ';
-  // }
-  // std::cout<<std::endl;
 
   packet.insert(packet.begin(),temp.begin(),temp.end());
   //std::cout<<"L3: "<<packet.size()<<std::endl;

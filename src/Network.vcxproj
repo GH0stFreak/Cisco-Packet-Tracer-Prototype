@@ -25,7 +25,6 @@
     <ClInclude Include="class\enums.h" />
     <ClInclude Include="class\functions\sendARPReply.h" />
     <ClInclude Include="class\global.h" />
-    <ClInclude Include="class\headers.h" />
     <ClInclude Include="class\helper.h" />
     <ClInclude Include="class\interface\clientIface.h" />
     <ClInclude Include="class\interface\dhcpIface.h" />

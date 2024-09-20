@@ -133,10 +133,7 @@ public:
 				PROTOCOL::tl_ports port = processUDPHeader(&iface, pseudo_hdr, udp_hdr, payload);
 
 				if (port == PROTOCOL::tl_ERROR || port == PROTOCOL::dhcp_client) {
-					/*for (auto el : ram) {
-						std::cout << +el << " ";
-					}
-					logger->warn("Here!: {}",std::to_string(port));*/
+					
 					printMessage(CONSOLE_WARN, "Dropped");
 					return;
 				}
@@ -223,10 +220,8 @@ public:
 		{
 			PROTOCOL::arp_hdr arp_hdr(ram);
 			// PROTOCOL::arp_hdr arp_hdr(ram, offset);
-			// std::cout<<"RECEIVE DHCP REQ\n";
 
 			PROTOCOL::action next_action = processARPHeader(&iface, arp_hdr);
-			// std::cout<<"prot"<<next_action<<std::endl;
 
 			switch (next_action)
 			{
@@ -396,17 +391,6 @@ public:
 
 		addIPv4Header(packet, 20, PROTOCOL::ip_protocol_icmp, src_ip, dst_ip, (uint16_t)generateRandomNumber(16));
 
-		// std::cout<<"ECHO REQUEST!"<<"\n";
-		// for(auto el: packet){
-		// 	std::cout<<+el<<" ";
-		// }
-		// std::cout<<"\n";
-
-		// std::cout<<"Gateway: "<<ipToString(iface.getGATEWAY())<<"\n";
-		// std::cout<<"Subnet: "<<ipToString(iface.getSUBNET_MASK())<<"\n";
-		// std::cout<<"Src: "<<ipToString((src_ip&iface.getSUBNET_MASK()))<<"\n";
-		// std::cout<<"Dst: "<<ipToString((dst_ip&iface.getSUBNET_MASK()))<<"\n";
-
 		uint8_array_6 dst_mac{};
 
 		if ((src_ip & iface.getSUBNET_MASK()) == (dst_ip & iface.getSUBNET_MASK())) {
@@ -434,11 +418,6 @@ public:
 
 		printMessage(CONSOLE_INFO, "Dhcp(Icmp Request) Sent: {}", packet.size());
 
-		// for(auto el: packet){
-		  // 	std::cout<<+el<<" ";
-		  // }
-		  // std::cout<<"\n";
-
 		iface.putMessageInOutputIface(&packet);
 	}
 
@@ -453,15 +432,6 @@ public:
 		addIcmpT0Header(packet, PROTOCOL::icmp_echo_reply, 0, identifier, sequence_no, payload);
 
 		addIPv4Header(packet, 20, PROTOCOL::ip_protocol_icmp, src_ip, dst_ip, (uint16_t)generateRandomNumber(16));
-
-		// std::cout<<"Gateway: "<<ipToString(iface.getGATEWAY())<<"\n";
-		// std::cout<<"Subnet: "<<ipToString(iface.getSUBNET_MASK())<<"\n";
-		// std::cout<<"Src: "<<ipToString((src_ip&iface.getSUBNET_MASK()))<<"\n";
-		// std::cout<<"ECHO REPLY!"<<"\n";
-		// for(auto el: packet){
-		// 	std::cout<<+el<<" ";
-		// }
-		// std::cout<<"\n";
 
 		uint8_array_6 dst_mac{};
 
@@ -489,11 +459,6 @@ public:
 		addInternalHeader(packet, 0);
 
 		printMessage(CONSOLE_INFO, "Dhcp(Icmp Reply) Sent: {}", packet.size());
-
-		// for(auto el: packet){
-		  // 	std::cout<<+el<<" ";
-		  // }
-		  // std::cout<<"\n";
 
 		iface.putMessageInOutputIface(&packet);
 	}

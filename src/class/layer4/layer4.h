@@ -83,29 +83,9 @@ PROTOCOL::tl_ports processUDPHeader(T *iface, PROTOCOL::pseudo_hdr &pseudo_hdr, 
   // TODO: Write the logic
   std::list<uint8_t> pseudo_hdr_bytes;
   pseudo_hdr.serialize(pseudo_hdr_bytes);
-  // pseudo_hdr.display();
-
-	// std::cout<<"Pseudo\n";
-  // for(auto i : pseudo_hdr_bytes){
-	// 						std::cout<<+i<<" ";
-	// 					}
-	// std::cout<<"\n";
 
   std::list<uint8_t> udp_hdr_bytes;
   udp_hdr.serialize(udp_hdr_bytes);
-  // udp_hdr.display();
-
-	// std::cout<<"Udp\n";
-  // for(auto i : udp_hdr_bytes){
-	// 						std::cout<<+i<<" ";
-	// 					}
-	// std::cout<<"\n";
-
-  // std::cout<<"Payload\n";
-  // for(auto i : payload){
-	// 						std::cout<<+i<<" ";
-	// 					}
-	// std::cout<<"\n";
 	
   if(verifyChecksum(pseudo_hdr_bytes, udp_hdr_bytes, payload) == false) { 
     return PROTOCOL::tl_ERROR; 
@@ -144,9 +124,6 @@ void addUDPHeader(std::deque<uint8_t> &packet, uint16_t sport, uint16_t dport, u
   // Calculate checksum for pseudo, udp headers and payload
   uint16_t checksum = calculateChecksum(pseudo_hdr_bytes, udp_hdr_bytes, packet);
   
-  // std::cout<<"Checksum: " <<(checksum>>8)<<" "<<(checksum&0xff) <<"\n";
-
-
   // Initialize iterator to the beginning of udp_hdr bytes list
   std::list<uint8_t>::iterator it = udp_hdr_bytes.begin(); 
 
@@ -155,20 +132,8 @@ void addUDPHeader(std::deque<uint8_t> &packet, uint16_t sport, uint16_t dport, u
   std::advance(it, 1);
   *it = checksum&0xFF;
 
-  // std::cout<<"Packet\n";
-  // for(auto i : packet){
-	// 						std::cout<<+i<<" ";
-	// 					}
-	// std::cout<<"\n";
-
   packet.insert(packet.begin(),udp_hdr_bytes.begin(),udp_hdr_bytes.end());
 
-
-  //std::cout<<"L4: "<<packet.size()<<std::endl;
-  // for(size_t i{}; i <packet.size();i++){
-  //           std::cout<<" "<<+packet[i];
-  //       }
-  // std::cout<<std::endl;
 }
 
 void addTCPHeader(std::deque<uint8_t> &packet, uint16_t sport, uint16_t dport, uint32_t seq_num, uint32_t ack_num, uint8_t hlen, bool urg, bool ack, bool psh, bool rst, bool syn, bool fin, uint16_t window_size, uint32_t src_ip, uint32_t dst_ip, PROTOCOL::ip_protocol protocol){
@@ -189,9 +154,6 @@ void addTCPHeader(std::deque<uint8_t> &packet, uint16_t sport, uint16_t dport, u
   // Calculate checksum for pseudo, udp headers and payload
   uint16_t checksum = calculateChecksum(pseudo_hdr_bytes, tcp_hdr_bytes, packet);
   
-  // std::cout<<"Checksum: " <<(checksum>>8)<<" "<<(checksum&0xff) <<"\n";
-
-
   // Initialize iterator to the beginning of udp_hdr bytes list
   std::list<uint8_t>::iterator it = tcp_hdr_bytes.begin(); 
 
@@ -200,14 +162,7 @@ void addTCPHeader(std::deque<uint8_t> &packet, uint16_t sport, uint16_t dport, u
   std::advance(it, 1);
   *it = checksum&0xFF;
 
-  // std::cout<<"Packet\n";
-  // for(auto i : packet){
-	// 						std::cout<<+i<<" ";
-	// 					}
-	// std::cout<<"\n";
-
   packet.insert(packet.begin(),tcp_hdr_bytes.begin(),tcp_hdr_bytes.end());
-
 
   //std::cout<<"L4: "<<packet.size()<<std::endl;
 }

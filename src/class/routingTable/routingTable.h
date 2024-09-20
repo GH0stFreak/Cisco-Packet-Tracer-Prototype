@@ -4,6 +4,7 @@
 #include "..\common.h"
 #include "..\utils.h"
 
+// Used Trie Data Structure for implementing the Routing Table for faster lookup
 
 enum RouteType {
     STATIC, 
@@ -68,14 +69,7 @@ struct Node {
         label = generateRandomNumber(16);
         route = tempRoute;
     }
-    // Node(Route tempRoute){
-    //     label = generateRandomNumber(16);
-    //     // route = tempRoute;
-    //     route.dst_ip          = tempRoute.dst_ip;
-    //     route.prefix_length   = tempRoute.prefix_length;
-    //     route.iface       = tempRoute.iface;
-    //     route.type            = tempRoute.type;
-    // }
+    
 
     Node(uint32_t tempIp, uint8_t tempPrefix, uint8_t tempIface){
         label = generateRandomNumber(16);
@@ -112,7 +106,6 @@ void CreateTable(Node *root, std::vector<Node> routing_table)
     std::vector<Node>::iterator ptr;
 
     int size = 32 - 1;
-    // std::cout << "Size: " << size << std::endl;
     Node *tempRoot = root;
 
     for (ptr = routing_table.begin(); ptr < routing_table.end(); ptr++)
@@ -269,9 +262,7 @@ public:
         std::bitset<32> tempIp = route.dst_ip;
         for (size_t i{}; i < route.prefix_length; i++)
             {
-                // std::cout << "Iter: "<<+i<<std::endl;
                 if(root==nullptr){
-                    // std::cout << "HEHE\n";
                     root = tempRoot;
                     tempRoot = nullptr;
                     delete tempRoot;
@@ -306,7 +297,6 @@ public:
             size_t count{0};
             while (!stop_thread) {
                 {   
-                    // std::cout<<"TIME: "<<+count<<std::endl;
                     // Decrease the time for each entry
                     for (Node &entry : routing_table) {
                         --entry.route.time;
@@ -318,22 +308,6 @@ public:
                         // Use a temporary container to store the iterators of elements to be removed
                         std::vector<std::vector<Node>::iterator> to_remove;
 
-                        // for (auto i = routing_table.begin(); i != routing_table.end(); ++i) {
-                        //     if (i->route.time <= 0) {
-                        //         std::cout << "Removed: " << ipToString(i->route.dst_ip) << " " << std::format("{:b}", ipToUint32(ipToString(i->route.dst_ip))) << std::endl;
-                        //         RemoveRoute(*i);
-                        //         to_remove.push_back(i);
-                        //     }
-                        // }
-                        // std::cout<<"===================="<<"\n";
-
-                        // // Erase elements outside of the loop to avoid iterator invalidation issues
-                        // while (!to_remove.empty()) {
-                        //     std::vector<Node>::iterator it = to_remove.back();
-                        //     to_remove.pop_back();
-                        //     routing_table.erase(it);
-                        // }
-
                         auto i = routing_table.begin();
                         while (i != routing_table.end()) {
                             if (i->route.time <= 0) {
@@ -344,11 +318,6 @@ public:
                                 ++i;
                             }
                         }
-                        // std::cout<<"===================="<<"\n";
-
-                        // for(auto el: routing_table){
-                        //     std::cout<<"IP: "<<ipToString(el.route.dst_ip)<<"\n";
-                        // }
 
                     } // Release the lock when lock goes out of scope
                 }

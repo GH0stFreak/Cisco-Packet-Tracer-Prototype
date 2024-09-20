@@ -63,11 +63,10 @@ Switch() : count(0), control_plane_count(0), Loggable::Loggable("Switch "+ std::
 					}
 					else {
 						logger->info("UNICAST!");
-					}*/
-					//logger->info("Switch Iface: {}", (uint8_t)output_port);
-					//logger->info("Switch Iface: {}", (uint8_t)~output_port);
+					}
+					logger->info("Switch Iface: {}", (uint8_t)output_port);
+					logger->info("Switch Iface: {}", (uint8_t)~output_port);*/
 					
-
 
 					// Checking the output port value against the id of interface
 					// If output interface > 100 and less then 100+no. of interfaces the packet is for control plane
@@ -272,14 +271,14 @@ Switch() : count(0), control_plane_count(0), Loggable::Loggable("Switch "+ std::
 		}
 	}
 
-	void ShowPacketCount() {
+	inline void ShowPacketCount() {
 		for (auto& iface : ifaces) {
 			iface.BufferPacketCount();
 		}
 		std::cout <<"================================" << std::endl;
 	}
 	
-	void printIfaceStateStatus() {
+	inline void printIfaceStateStatus() {
 		for (auto& iface : ifaces) {
 			if(iface.link != nullptr)
 			iface.printStateStatus();
@@ -404,9 +403,6 @@ Switch() : count(0), control_plane_count(0), Loggable::Loggable("Switch "+ std::
 		return PROTOCOL::PACKET_ERROR;
 		*/
 		// If switch is root bridge
-		//logger->info("Packet Mac: {}", uint64ToHexString(my_id));
-		//logger->info("Packet Mac: {}", macToString(ifaces[0].mac));
-		//logger->info("Packet root: {}, Switch root: {}", uint64ToHexString(bpdu_hdr.bpdu_r_id), uint64ToHexString(sw->root_id));
 		if (sw->root_bridge == true) {
 			// If the root bridge & Getting Superior BPDU
 			if (bpdu_hdr.bpdu_r_id < sw->root_id) {

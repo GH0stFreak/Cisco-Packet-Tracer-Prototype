@@ -25,9 +25,6 @@ public:
 	uint32_t gateway_ipv4 {};
 	uint32_t dns_ipv4 {};
 
-  // std::atomic<bool> &flag_;    
-  // std::condition_variable &signal;
-	// mutable std::mutex mtx;
 };
 
 #endif

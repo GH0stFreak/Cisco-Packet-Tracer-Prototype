@@ -8,7 +8,7 @@
 #include "global.h"
 
 
-std::string ConvertWideCharToString(const wchar_t* wstr)
+inline std::string ConvertWideCharToString(const wchar_t* wstr)
 {
     // Get the required buffer size for the conversion
     int bufferSize = WideCharToMultiByte(CP_UTF8, 0, wstr, -1, nullptr, 0, NULL, NULL);
@@ -555,7 +555,7 @@ void createControls(HWND hwnd,std::vector<T*> &pointerArray,int&x,int &y) {
     }
 }
 
-void addControls(HWND hwnd) {
+inline void addControls(HWND hwnd) {
     int x = 10;
     int y = 40;
 

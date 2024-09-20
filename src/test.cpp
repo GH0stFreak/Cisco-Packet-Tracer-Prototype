@@ -101,6 +101,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 								std::chrono::hours(6));
 	std::vector<IpPool> dhcp1IpPools {pool1,pool2};
 
+	// Dhcp takes the first ip of the first ip pool and assigns that to the interface of it.
 	Dhcp d1{dhcp1IpPools};
 	
 	Switch s1;
@@ -149,7 +150,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 	allDhcp.push_back(&d1);
 	allDhcp.push_back(&d2);
 
-
+	// Mac Address for the interfaces
 	// c1: 1
 	// c2: 2
 	// c3: 3
@@ -172,6 +173,10 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 	// s1.ifaces[2].link = &c3.iface;
 	// s1.ifaces[3].link = &d1.iface;
 
+
+	/*======================================*/
+	/*============ Device Links ============*/
+	/*======================================*/
 	c1.iface.link = &s1.ifaces[0];
 	c2.iface.link = &s1.ifaces[1];
 

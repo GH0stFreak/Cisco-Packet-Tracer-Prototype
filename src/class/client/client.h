@@ -11,23 +11,6 @@
 #include "..\deviceWindow.h"
 #include "..\pcapWriter.h"
 
-//#include "..\global.h"
-//class DeviceWindow;
-// 
-//struct Offer {
-//	bool ongoing_dhcp_process;
-//	uint32_t identification_no;
-//	uint32_t offered_ip;
-//	uint32_t offered_mask;
-//	uint32_t offered_gateway;
-//	uint32_t offered_dns;
-//	std::chrono::time_point<std::chrono::high_resolution_clock> leased_start_time;
-//	std::chrono::time_point<std::chrono::high_resolution_clock> leased_expire_time;
-//};
-
-// template <typename T>
-// class Client : public Layer5<T> 
-//class Client : public Layer5, public Loggable, public Device
 class Client : public Layer5, public Loggable
 {
 public:

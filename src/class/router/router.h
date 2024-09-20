@@ -64,12 +64,7 @@ public:
 					// Get output port of packet
 					uint8_t output_port = packet[2];
 					printMessage(CONSOLE_INFO, "Router Iface: {}", +output_port);
-					/*for (auto el : packet) {
-						std::cout << +el << " ";
-					}
-					std::cout << std::endl;*/
-
-
+					
 					// Checking the output port value against the id of interface
 					for (auto& iface : ifaces) {
 						if (output_port <= 15 && output_port == iface.id) {
@@ -146,8 +141,8 @@ public:
 
 			} // Release the lock when lock goes out of scope
       
-      		// Sleep after processing for 1 second
-      		std::this_thread::sleep_for(std::chrono::seconds(1));
+      // Sleep after processing for 1 second
+      std::this_thread::sleep_for(std::chrono::seconds(1));
 		}
 	});
 
