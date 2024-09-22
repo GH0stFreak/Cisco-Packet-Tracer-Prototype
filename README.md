@@ -121,3 +121,9 @@ python ./init.py
 3. For router if there isn't an IP to MAC entry in ARP then it will send ARP request and send the packet to the Arp Waiting Queue.
 4. The packet internal packet will have output port after checking the routing table or mac table and then interface will insert the packet in the fabric and then the controller will check the output port in internal header and then send the packet in the output buffer of the said port.
 5. The interface will also mark the packets like for STP so that they will go to to control plane.
+
+## Default Connection Map
+
+1. Client 1, Client 2 and Dhcp 1 connected to switch 1
+2. Client 3, Client 4 and Dhcp 2 connected to switch 2
+3. Switch 1 and Switch 2 connected to Router
