@@ -2,7 +2,6 @@
 #ifndef DEVICEWINDOW_H
 #define DEVICEWINDOW_H
 
-#include "common.h"
 #include "helper.h"
 #include "utils.h"
 #include "global.h"

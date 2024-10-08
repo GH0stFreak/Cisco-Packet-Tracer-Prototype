@@ -2,9 +2,16 @@
 #ifndef GLOBAL_H
 #define GLOBAL_H
 
-#include "common.h"
+//#include "common.h"
+#include <windows.h>
+#include <vector>
 
 #define ENTER_COMMAND 2
+
+class Client;
+class Switch;
+class Router;
+class Dhcp;
 
 // Register the window class.
 WNDCLASS mainWindowClass = { };
@@ -12,11 +19,6 @@ WNDCLASS clientWindowClass = { };
 WNDCLASS switchWindowClass = { };
 WNDCLASS routerWindowClass = { };
 WNDCLASS dhcpWindowClass = { };
-
-class Client;
-class Router;
-class Dhcp;
-class Switch;
 
 std::vector<Client*> allClients = {};
 std::vector<Router*> allRouter = {};

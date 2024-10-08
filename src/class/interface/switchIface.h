@@ -3,6 +3,8 @@
 #define SWITCHIFACE_H
 #include "interface.h"
 
+#define STP_BOOL 0
+
 template <typename QueueType>
 class SwitchIface : public Iface {
 public:
@@ -112,39 +114,47 @@ public:
     void processOutputPktRam() {}
 
     void start() {
-        time_thread = std::thread([this]() {
-            while (!stop_thread) {
-                // Check the time against expire time
-                {
-                    std::lock_guard<std::mutex> lock(muxTime);
-                    // Checking whether in LISTENING or LEARNING and decrementing forward delay and if it becomes zero means the state can be changed to upper  state
-                    if (status == LISTENING || status == LEARNING) {
+        if (STP_BOOL == 0) {
+            status = FORWARDING;
+            state = DESIGNATED;
+            return;
+        }
+        else {
+            time_thread = std::thread([this]() {
+                while (!stop_thread) {
+                    // Check the time against expire time
+                    {
+                        std::lock_guard<std::mutex> lock(muxTime);
+                        // Checking whether in LISTENING or LEARNING and decrementing forward delay and if it becomes zero means the state can be changed to upper  state
+                        if (status == LISTENING || status == LEARNING) {
 
-                        forward_delay--;
+                            forward_delay--;
 
-                        if (forward_delay == 0) {
-                            forward_delay = set_forward_delay_to;
-                            if (status == LISTENING) status = LEARNING;
-                            else if (status == LEARNING) {
-                                status = FORWARDING;
+                            if (forward_delay == 0) {
+                                forward_delay = set_forward_delay_to;
+                                if (status == LISTENING) status = LEARNING;
+                                else if (status == LEARNING) {
+                                    status = FORWARDING;
+                                }
                             }
+
                         }
+                        else forward_delay = set_forward_delay_to;
 
-                    }else forward_delay = set_forward_delay_to;
+                    } // Release the lock when lock goes out of scope
 
-                } // Release the lock when lock goes out of scope
+                      // Sleep after processing for 1 second
+                    std::this_thread::sleep_for(std::chrono::seconds(1));
 
-                  // Sleep after processing for 1 second
-                std::this_thread::sleep_for(std::chrono::seconds(1));
-
-                {
-                    std::unique_lock<std::mutex> lk(cv_m);
-                    cv.wait(lk, [] { return !paused; });
+                    {
+                        std::unique_lock<std::mutex> lk(cv_m);
+                        cv.wait(lk, [] { return !paused; });
+                    }
                 }
-            }
-            });
+                });
 
-        time_thread.detach();
+            time_thread.detach();
+        }
     };
 
     void printStateStatus() {

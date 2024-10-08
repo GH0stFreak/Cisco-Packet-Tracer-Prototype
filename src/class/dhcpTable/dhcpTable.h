@@ -1,8 +1,8 @@
 #pragma once 
 #ifndef DHCPTABLE_H
 #define DHCPTABLE_H
-#include "..\common.h"
-#include "..\interface\interface.h"
+
+//#include "..\interface\interface.h"
 //#include "..\layer5\layer5.h"
 #include "..\interface\dhcpIface.h"
 

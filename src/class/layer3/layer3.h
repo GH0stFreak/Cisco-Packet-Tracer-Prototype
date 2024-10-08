@@ -2,7 +2,7 @@
 #ifndef LAYER3_H
 #define LAYER3_H
 #include "..\layer2\layer2.h"
-#include "..\interface\serverIface.h"
+//#include "..\interface\serverIface.h"
 //#include "..\interface\clientIface.h"
 
 

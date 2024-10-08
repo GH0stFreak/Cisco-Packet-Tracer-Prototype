@@ -1,15 +1,18 @@
 #pragma once
 #ifndef CLIENT_H
 #define CLIENT_H
-#include "..\common.h"
+
 #include "..\interface\clientIface.h"
 #include "..\arpCache\arpCache.h"
 #include "..\layer5\layer5.h"
 #include "..\dhcpTable\dhcpTable.h"
 #include "..\logger.h"
 #include "..\stopThread.h"
-#include "..\deviceWindow.h"
+//#include "..\deviceWindow.h"
 #include "..\pcapWriter.h"
+
+template<class Device>
+class DeviceWindow;
 
 class Client : public Layer5, public Loggable
 {
@@ -421,7 +424,7 @@ public:
 
 		std::ostringstream out;
 
-		for (auto el : packet) {
+		for (uint8_t el : packet) {
 			out << +el << " ";
 		}
 		std::cout << out.str() << std::endl;

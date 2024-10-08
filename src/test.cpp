@@ -1,12 +1,12 @@
 
 // Define endianness macros if not already defined
 #include "class\common.h"
-#include "class\deviceWindow.h"
 #include "class\client\client.h"
 #include "class\switch\switch.h"
 #include "class\dhcp\dhcp.h"
 #include "class\router\router.h"
 #include "class\helper.h"
+#include "class\deviceWindow.h"
 
 uint8_t Iface::count1 = 0;
 uint8_t Iface::count2 = 0;

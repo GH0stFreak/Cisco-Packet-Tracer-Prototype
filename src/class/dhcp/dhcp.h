@@ -8,9 +8,11 @@
 #include "..\dhcpTable\dhcpTable.h"
 #include "..\logger.h"
 #include "..\stopThread.h"
-#include "..\deviceWindow.h"
+//#include "..\deviceWindow.h"
 #include "..\pcapWriter.h"
 
+template<class Device>
+class DeviceWindow;
 
 class Dhcp : public Layer5, public Loggable 
 {
@@ -147,11 +149,12 @@ public:
 					// dhcp_hdr.display();
 					PROTOCOL::action next_action_dhcp = processDHCPHeader(&iface, dhcp_hdr);
 
+
 					switch (next_action_dhcp)
 					{
 					case PROTOCOL::RECEIVE_DHCP_DISCOVER: {
 
-						//logger->warn("Get DHCP!");
+						logger->warn("Get DHCP!");
 						uint32_t id;
 						uint8_array_6 client_mac;
 

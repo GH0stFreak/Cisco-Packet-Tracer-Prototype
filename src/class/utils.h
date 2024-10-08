@@ -2,7 +2,22 @@
 #pragma once
 #ifndef UTILS_H
 #define UTILS_H
-#include "common.h"
+//#include "common.h"
+
+#include <spdlog\spdlog.h>
+
+#include <cstdint>
+#include <vector>
+#include <string>
+#include <stdexcept>
+#include <algorithm>
+#include <iomanip>
+#include <bitset>
+#include <optional>
+#include <random>
+#include <queue>
+#include <list>
+#include <iostream>
 
 #ifndef MAC_ADDR_LEN
 #define MAC_ADDR_LEN 6

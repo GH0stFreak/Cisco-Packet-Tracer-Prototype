@@ -120,15 +120,16 @@ enum dhcp_opcode {
     dhcp_op_request           = 0x0001,
     dhcp_op_reply             = 0x0002,
 };
+
 enum dhcp_type_options {
-    dhcp_discover_code        = 0x0001,
-    dhcp_offer_code           = 0x0002,
-    dhcp_request_code         = 0x0003,
-    dhcp_decline_code         = 0x0004,
-    dhcp_acknowledge_code     = 0x0005,
-    dhcp_neg_acknowledge_code = 0x0006,
-    dhcp_release_code         = 0x0007,
-    dhcp_inform_code          = 0x0008,
+    dhcp_discover_code        = 0x01,
+    dhcp_offer_code           = 0x02,
+    dhcp_request_code         = 0x03,
+    dhcp_decline_code         = 0x04,
+    dhcp_acknowledge_code     = 0x05,
+    dhcp_neg_acknowledge_code = 0x06,
+    dhcp_release_code         = 0x07,
+    dhcp_inform_code          = 0x08,
 };
 
 enum arp_hrd_fmt {

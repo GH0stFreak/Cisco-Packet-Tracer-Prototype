@@ -20,7 +20,7 @@ public:
       std::vector<uint8_t> options = dhcp_hdr.dhcp_opt.value();
       size_t i{};
 
-      if(options[i++]!=99 && options[i++]!=130 && options[i++]!=83 && options[i++]!=99) return PROTOCOL::PACKET_ERROR;
+      if(options[i++]!=99 || options[i++]!=130 || options[i++]!=83 || options[i++]!=99) return PROTOCOL::PACKET_ERROR;
 
 
       for(i; i < options.size(); i++){
@@ -54,30 +54,32 @@ public:
 
 
         iface->logger->info("Process Server Dhcp!");
-      if(dhcp_hdr.dhcp_hrd != 6 || dhcp_hdr.dhcp_hln != 6 || dhcp_hdr.dhcp_op != PROTOCOL::dhcp_op_request || !dhcp_hdr.dhcp_opt.has_value()) return PROTOCOL::PACKET_ERROR;
+        if(dhcp_hdr.dhcp_hrd != 6 || dhcp_hdr.dhcp_hln != 6 || dhcp_hdr.dhcp_op != PROTOCOL::dhcp_op_request || !dhcp_hdr.dhcp_opt.has_value()) return PROTOCOL::PACKET_ERROR;
 
-      std::vector<uint8_t> options = dhcp_hdr.dhcp_opt.value();
+        std::vector<uint8_t> options = dhcp_hdr.dhcp_opt.value();
 
-      size_t i{};
+        size_t i{};
 
-      if(options[i++]!=99 && options[i++]!=130 && options[i++]!=83 && options[i++]!=99) return PROTOCOL::PACKET_ERROR;
-      
+        if(options[i++]!=99 || options[i++]!=130 || options[i++]!=83 || options[i++]!=99) return PROTOCOL::PACKET_ERROR;
+
       for(i; i < options.size(); i++){
+
         if(options[i++]  != PROTOCOL::MSG_TYPE){
-          //size_t len = options[i++];
+            //size_t len = options[i++];
           continue;
         }
 
-        if(options[i++]!=1) return PROTOCOL::PACKET_ERROR;
+        if (options[i++] != 1) { 
+            return PROTOCOL::PACKET_ERROR; }
 
         switch(options[i++])
           {
             case PROTOCOL::dhcp_discover_code:
-              return PROTOCOL::RECEIVE_DHCP_DISCOVER;   
+                return PROTOCOL::RECEIVE_DHCP_DISCOVER;
             case PROTOCOL::dhcp_request_code:
               return PROTOCOL::RECEIVE_DHCP_REQUEST;
             default:
-              return PROTOCOL::PACKET_ERROR;
+                return PROTOCOL::PACKET_ERROR;
           }
       }
       
@@ -349,11 +351,13 @@ public:
 
     uint16_t size {static_cast<uint16_t>(packet.size())};  // Would be default the dhcp discover header size = 44 bytes 
     
-    //std::cout<<"L5: "<<size<<std::endl;
-    // for(size_t i{}; i <packet.size();i++){
-    //         std::cout<<" "<<+packet[i];
-    //     }
-    // std::cout<<std::endl;
+    std::cout<<"L5: "<<size<<std::endl;
+     std::ostringstream out;
+
+     for (uint8_t el : packet) {
+         out << +el << " ";
+     }
+     std::cout << out.str() << std::endl;
   }
 
   void addDhcpOfferHeader(std::deque<uint8_t> &packet, uint32_t id, uint32_t offer_ip, const uint8_array_6 &src_mac, uint32_t mask, uint32_t gateway, uint32_t dns, uint32_t lease_time, uint32_t server_ip){

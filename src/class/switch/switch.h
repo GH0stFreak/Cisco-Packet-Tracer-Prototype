@@ -7,10 +7,13 @@
 #include "..\interface\switchIface.h"
 #include "..\layer2\layer2.h"
 #include "..\stopThread.h"
-#include "..\deviceWindow.h"
+//#include "..\deviceWindow.h"
 #include "..\pcapWriter.h"
 
+
 //class Layer2;
+template<class Device>
+class DeviceWindow;
 
 class Switch : public Layer2, public Loggable
 {
@@ -617,7 +620,12 @@ Switch() : count(0), control_plane_count(0), Loggable::Loggable("Switch "+ std::
 	}
 
 	void start() {
-		time_thread = std::thread([this]() {
+		if (STP_BOOL == 0) {
+			return;
+		}
+		else {
+			time_thread = std::thread([this]() {
+			
 			while (!stop_thread) {
 				// Check the time against expire time
 				{
@@ -657,7 +665,8 @@ Switch() : count(0), control_plane_count(0), Loggable::Loggable("Switch "+ std::
 			}
 			});
 
-		time_thread.detach();
+			time_thread.detach();
+		}
 	};
 
 	

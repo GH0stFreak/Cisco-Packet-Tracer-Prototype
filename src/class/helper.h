@@ -1,5 +1,9 @@
  #pragma once
- #include "common.h"
+ //#include "common.h"
+#include <string>
+#include <vector>
+#include <fstream>
+#include <spdlog\spdlog.h>
 
 void getNumber(std::string device, size_t &number) {
     for (size_t i{ 1 }; i < device.length(); i++) {

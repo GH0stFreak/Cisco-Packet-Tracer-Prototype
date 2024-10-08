@@ -3,12 +3,11 @@
 #define INTERFACE_H
 //#include "..\enums.h"
 #include "..\enums.h"
-#include "..\cpu.h"
-#include "..\common.h"
 #include "..\logger.h"
 #include "..\stopThread.h"
 #include "..\deviceWindow.h"
 
+class DeviceWindowBase;
 
 enum iFaceState {
 	DESIGNATED,		// Can be used to forward normal traffic
