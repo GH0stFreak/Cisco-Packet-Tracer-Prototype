@@ -4,8 +4,8 @@
 
 #include "..\interface\clientIface.h"
 #include "..\arpCache\arpCache.h"
-#include "..\layer5\layer5.h"
-#include "..\dhcpTable\dhcpTable.h"
+#include "..\layer\layer5.h"
+#include "..\table\dhcpTable.h"
 #include "..\logger.h"
 #include "..\stopThread.h"
 //#include "..\deviceWindow.h"
@@ -58,7 +58,7 @@ public:
 						}
 					}
 				}
-				std::this_thread::sleep_for(std::chrono::milliseconds(200)); // Sleep for 200 seconds just so my cpu doesnt just keep locking and unlocking the mutex
+				std::this_thread::sleep_for(std::chrono::milliseconds(10)); // Sleep for 200 seconds just so my cpu doesnt just keep locking and unlocking the mutex
 				// std::cout<<"sleep200"<<std::endl;
 				{
 					std::unique_lock<std::mutex> lk(cv_m);
@@ -190,21 +190,8 @@ public:
 				PROTOCOL::pseudo_hdr pseudo_hdr(ipv4_hdr.ip_src, ipv4_hdr.ip_dst, ip_type, ipv4_hdr.ip_len - ((ipv4_hdr.ip_v_hl & IP_HL) * 4));
 				// pseudo_hdr.display();
 
-				std::deque<uint8_t> payload;
-				//auto start = ram.begin() + offset;
-				//auto end = ram.begin() + offset + udp_hdr.udp_len - 8;
 
-				auto start = ram.begin();
-				auto end = ram.end();
-
-				std::copy(start, end, std::back_inserter(payload));
-
-				// std::deque<uint8_t> payload;
-				// auto start = ram_.begin();
-				// auto end = ram_.begin() + udp_hdr.udp_len - 8;
-
-				// std::copy(start, end, std::back_inserter(payload));
-
+				std::deque<uint8_t> payload(ram.begin(), ram.end());
 
 				PROTOCOL::tl_ports port = processUDPHeader(&iface, pseudo_hdr, udp_hdr, payload);
 

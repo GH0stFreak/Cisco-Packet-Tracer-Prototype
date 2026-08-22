@@ -3,7 +3,7 @@
 #define MACTABLE_H
 #include "..\common.h"
 #include "..\interface\interface.h"
-#include "..\layer5\layer5.h"
+#include "..\layer\layer5.h"
 
 struct MacTableEntry {
     uint8_array_6 mac{};

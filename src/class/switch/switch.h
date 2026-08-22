@@ -3,9 +3,9 @@
 #define SWITCH_H
 
 #include "..\common.h"
-#include "..\macTable\macTable.h"
+#include "..\table\macTable.h"
 #include "..\interface\switchIface.h"
-#include "..\layer2\layer2.h"
+#include "..\layer\layer2.h"
 #include "..\stopThread.h"
 //#include "..\deviceWindow.h"
 #include "..\pcapWriter.h"

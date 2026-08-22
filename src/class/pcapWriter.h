@@ -6,7 +6,7 @@
 #include "common.h"
 
 //#include "protocol.h"
-#include "layer5\layer5.h"
+#include "layer\layer5.h"
 
 template<typename T>
 void pop_front(std::vector<T>& vec)
@@ -68,7 +68,7 @@ public:
 			filePath = std::filesystem::absolute(filePath);
 		}
 
-		pFile = fopen(filePath.string().c_str(), "wb"); // open for writing in binary mode
+		fopen_s(&pFile, filePath.string().c_str(), "wb"); // open for writing in binary mode
 
 		if (!pFile) {
 			perror("File opening failed");

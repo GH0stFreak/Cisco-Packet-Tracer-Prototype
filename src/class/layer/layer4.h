@@ -1,7 +1,7 @@
 #pragma once
 #ifndef LAYER4_H
 #define LAYER4_H
-#include "..\layer3\layer3.h"
+#include "..\layer\layer3.h"
 
 enum TCP_state {
 	CLOSED, 
@@ -75,36 +75,35 @@ struct TCPConnection {
 class Layer4 : public Layer3 {
 public:
   
-virtual void processTCPHeader(){}
-template<typename T>
-PROTOCOL::tl_ports processUDPHeader(T *iface, PROTOCOL::pseudo_hdr &pseudo_hdr, PROTOCOL::udp_hdr &udp_hdr, std::deque<uint8_t> payload){
+    virtual void processTCPHeader(){}
 
+    template<typename T>
+    PROTOCOL::tl_ports processUDPHeader(T *iface, PROTOCOL::pseudo_hdr &pseudo_hdr, PROTOCOL::udp_hdr &udp_hdr, std::deque<uint8_t> payload)
+    {
+        // TODO: Write the logic
+        std::list<uint8_t> pseudo_hdr_bytes;
+        pseudo_hdr.serialize(pseudo_hdr_bytes);
 
-  // TODO: Write the logic
-  std::list<uint8_t> pseudo_hdr_bytes;
-  pseudo_hdr.serialize(pseudo_hdr_bytes);
-
-  std::list<uint8_t> udp_hdr_bytes;
-  udp_hdr.serialize(udp_hdr_bytes);
+        std::list<uint8_t> udp_hdr_bytes;
+        udp_hdr.serialize(udp_hdr_bytes);
 	
-  if(verifyChecksum(pseudo_hdr_bytes, udp_hdr_bytes, payload) == false) { 
-    return PROTOCOL::tl_ERROR; 
-  }
+        if(verifyChecksum(pseudo_hdr_bytes, udp_hdr_bytes, payload) == false) { 
+            return PROTOCOL::tl_ERROR; 
+        }
 
+        if(udp_hdr.udp_sport == PROTOCOL::dhcp_client && udp_hdr.udp_dport == PROTOCOL::dhcp_server){
+            std::cout << "CLIENT SERVER\n";
+            return PROTOCOL:: dhcp_server;
+        }
+        else if(udp_hdr.udp_sport == PROTOCOL::dhcp_server && udp_hdr.udp_dport == PROTOCOL::dhcp_client){
+            return PROTOCOL:: dhcp_client;
+        }
+        else {
+            return PROTOCOL::message;
+        }
 
-  if(udp_hdr.udp_sport == PROTOCOL::dhcp_client && udp_hdr.udp_dport == PROTOCOL::dhcp_server){
-      return PROTOCOL:: dhcp_server;
-  }
-  else if(udp_hdr.udp_sport == PROTOCOL::dhcp_server && udp_hdr.udp_dport == PROTOCOL::dhcp_client){
-      return PROTOCOL:: dhcp_client;
-  }
-  else {
-      return PROTOCOL::message;
-  }
-
-
-  return PROTOCOL::tl_ERROR;
-}
+        return PROTOCOL::tl_ERROR;
+    }
 
 void addUDPHeader(std::deque<uint8_t> &packet, uint16_t sport, uint16_t dport, uint32_t src_ip, uint32_t dst_ip, PROTOCOL::ip_protocol protocol){
 
@@ -115,7 +114,7 @@ void addUDPHeader(std::deque<uint8_t> &packet, uint16_t sport, uint16_t dport, u
   std::list<uint8_t> udp_hdr_bytes;
   udp_hdr.serialize(udp_hdr_bytes);
 
-  PROTOCOL::pseudo_hdr pseudo_hdr(src_ip, dst_ip, (uint8_t)protocol, size + 8);
+  PROTOCOL::pseudo_hdr pseudo_hdr(src_ip, dst_ip, protocol, size + 8);
 	// pseudo_hdr.display();
   
   std::list<uint8_t> pseudo_hdr_bytes;

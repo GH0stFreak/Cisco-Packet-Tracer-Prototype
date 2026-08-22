@@ -1,7 +1,7 @@
 #pragma once
 #ifndef LAYER3_H
 #define LAYER3_H
-#include "..\layer2\layer2.h"
+#include "..\layer\layer2.h"
 //#include "..\interface\serverIface.h"
 //#include "..\interface\clientIface.h"
 
@@ -203,7 +203,7 @@ void processICMPReply(Iface *iface, PROTOCOL::icmp_t0_hdr icmp_t0_hdr, uint32_t 
 void addIPv4Header(std::deque<uint8_t> &packet, uint8_t hl, PROTOCOL::ip_protocol type, uint32_t ip_src, uint32_t ip_dst, uint16_t ip_id){
   uint16_t size {static_cast<uint16_t>(packet.size())};  
 
-  PROTOCOL::ipv4_hdr ipv4_hdr(hl,size+hl,(uint8_t)type,ip_src,ip_dst,ip_id);
+	PROTOCOL::ipv4_hdr ipv4_hdr(hl, size + hl, type, ip_src, ip_dst, ip_id);
   // ipv4_hdr.display();
 	
   std::list<uint8_t> temp;

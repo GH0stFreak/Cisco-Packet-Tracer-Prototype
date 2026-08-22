@@ -26,13 +26,14 @@ public:
         // Checking Destination MAC if not equal to broadcast address or to client mac then drop by just clearing RAM
         bool for_client = check_uint8_array_6(ethernet_hdr.ether_dhost, mac);
         bool for_broadcast = check_uint8_array_6(ethernet_hdr.ether_dhost, PROTOCOL::BroadcastEtherAddr);
-    
+        printMessage(CONSOLE_INFO, "processInputPktRam() called");
+
         if(for_client || for_broadcast){
 		    std::unique_lock<std::mutex> lock(mtx);
             if (!flag_.load(std::memory_order_acquire)) {
                 flag_.store(true, std::memory_order_release);
             }
-            signal.wait(lock);
+            signal.wait(lock, [&] { return !flag_.load(std::memory_order_acquire); });
         }else{
 
             //logger->warn("Wrong Address Dropped!");

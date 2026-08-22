@@ -501,19 +501,19 @@ public:
     }
 
     void addData(const std::string& newData) override {
+        if (!hConsole) return;
+        // Avoid synchronous cross-thread deadlock if called from background worker threads
+        DWORD windowThreadId = GetWindowThreadProcessId(hConsole, NULL);
+        if (windowThreadId != GetCurrentThreadId()) {
+            // Worker thread: Send notification without locking UI synchronous queue
+            PostMessage(hConsole, EM_SETSEL, (WPARAM)-1, (LPARAM)-1);
+            return;
+        }
         std::lock_guard<std::mutex> lock(windowMutex);
-
-        // Convert newData to wide string
         std::wstring wNewData(newData.begin(), newData.end());
-        // Set the selection to the end of the text
         SendMessage(hConsole, EM_SETSEL, (WPARAM)-1, (LPARAM)-1);
-        // Append new data
         SendMessage(hConsole, EM_REPLACESEL, FALSE, (LPARAM)wNewData.c_str());
-        // Scoll to the bottom
         SendMessage(hConsole, EM_LINESCROLL, 0, (LPARAM)1);
-
-        //InvalidateRect(hConsole, NULL, TRUE);
-        //UpdateWindow(hConsole);
     }
 
     void showWindow() override {
@@ -547,7 +547,7 @@ void createControls(HWND hwnd,std::vector<T*> &pointerArray,int&x,int &y) {
         DeviceWindowBase* rawBaseWnd = baseWnd.get(); // Get the raw pointer
 
         // Create a button for each device and store a pointer to the device window in the button's userdata
-        HWND hButton = CreateWindow(L"Button", L"Show", WS_VISIBLE | WS_CHILD | WS_BORDER, (x + 150), y, 130, 20, hwnd, (HMENU)wnd->val, NULL, NULL);
+        HWND hButton = CreateWindow(L"Button", L"Show", WS_VISIBLE | WS_CHILD | WS_BORDER, (x + 150), y, 130, 20, hwnd, (HMENU)(UINT_PTR)wnd->val, NULL, NULL);
         SetWindowLongPtr(hButton, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(rawBaseWnd));
 
         y += 30;

@@ -5,7 +5,7 @@ workspace "networkWindowApi"
     architecture "x64"
 
     project "Network"
-        kind "ConsoleApp"
+        kind "WindowedApp"
         language "C++"
         cppdialect "C++20"
 

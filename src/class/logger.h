@@ -35,14 +35,21 @@ public:
 
 		logger = std::make_shared<spdlog::logger>(sv.data());
 		logger->sinks().push_back(consoleSink);
+		if (fileSink) {
+				logger->sinks().push_back(fileSink);
+		}
 		logger->sinks().push_back(captureSink);
 		logger->set_pattern("[%T] [%=16n] [%^%l%$] %v");
+		logger->flush_on(spdlog::level::info);
 	}
 
 	Loggable(std::shared_ptr<spdlog::logger> logger) {
 		this->logger = logger;
 		captureSink = std::make_shared<StringCaptureSink>();
 		logger->sinks().push_back(consoleSink);
+		if (fileSink) {
+				logger->sinks().push_back(fileSink);
+		}
 		logger->sinks().push_back(captureSink);
 	}
 
@@ -54,5 +61,6 @@ public:
 
 protected:
 	static std::shared_ptr<spdlog::sinks::stderr_color_sink_mt> consoleSink;
+	static std::shared_ptr<spdlog::sinks::basic_file_sink_mt> fileSink;
 	std::shared_ptr<StringCaptureSink> captureSink;
 };

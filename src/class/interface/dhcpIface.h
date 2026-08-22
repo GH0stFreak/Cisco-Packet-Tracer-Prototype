@@ -31,7 +31,7 @@ public:
                   if (!flag_.load(std::memory_order_acquire)) {
                         flag_.store(true, std::memory_order_release);
                   }
-                  signal_.wait(lock);
+                  signal_.wait(lock, [&] { return !flag_.load(std::memory_order_acquire); });
             }
 
             ram.clear();

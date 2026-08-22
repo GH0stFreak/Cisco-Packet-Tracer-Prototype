@@ -3,7 +3,7 @@
 #define DHCPTABLE_H
 
 //#include "..\interface\interface.h"
-//#include "..\layer5\layer5.h"
+//#include "..\layer\layer5.h"
 #include "..\interface\dhcpIface.h"
 
 class DhcpIface;

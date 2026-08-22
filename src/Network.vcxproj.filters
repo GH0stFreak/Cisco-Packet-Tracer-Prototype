@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="class">
+      <UniqueIdentifier>{DB5E3B0F-4773-63C0-10F5-06207CC85FF1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="class\arpCache">
+      <UniqueIdentifier>{81CF5DF1-6D9D-51F7-5631-C21D429E2D5C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="class\client">
+      <UniqueIdentifier>{A93E1498-95A1-A33C-3E27-DCF22A696FBF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="class\device">
+      <UniqueIdentifier>{3AECF199-264F-813E-CFD4-B9F4BB164DC1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="class\dhcp">
+      <UniqueIdentifier>{E9FC6A13-D5B4-AC60-3EBC-85BC2A934751}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="class\interface">
+      <UniqueIdentifier>{9B746194-0700-CF58-1011-524D7C1B2B59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="class\layer">
+      <UniqueIdentifier>{07E45781-7399-D076-FC8D-CA4D6842C77A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="class\router">
+      <UniqueIdentifier>{CBBC4EBB-B71F-DE5F-60A5-16164CE7A9E2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="class\switch">
+      <UniqueIdentifier>{9C142EBE-8877-BD62-31FD-F5181D3F89E5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="class\table">
+      <UniqueIdentifier>{1247E881-7EFC-6077-07F1-5A4E73A5577B}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="class\arpCache\arpCache.h">
+      <Filter>class\arpCache</Filter>
+    </ClInclude>
+    <ClInclude Include="class\client\client.h">
+      <Filter>class\client</Filter>
+    </ClInclude>
+    <ClInclude Include="class\common.h">
+      <Filter>class</Filter>
+    </ClInclude>
+    <ClInclude Include="class\device\device.h">
+      <Filter>class\device</Filter>
+    </ClInclude>
+    <ClInclude Include="class\deviceWindow.h">
+      <Filter>class</Filter>
+    </ClInclude>
+    <ClInclude Include="class\dhcp\dhcp.h">
+      <Filter>class\dhcp</Filter>
+    </ClInclude>
+    <ClInclude Include="class\enums.h">
+      <Filter>class</Filter>
+    </ClInclude>
+    <ClInclude Include="class\global.h">
+      <Filter>class</Filter>
+    </ClInclude>
+    <ClInclude Include="class\helper.h">
+      <Filter>class</Filter>
+    </ClInclude>
+    <ClInclude Include="class\interface\clientIface.h">
+      <Filter>class\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="class\interface\dhcpIface.h">
+      <Filter>class\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="class\interface\interface.h">
+      <Filter>class\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="class\interface\routerIface.h">
+      <Filter>class\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="class\interface\serverIface.h">
+      <Filter>class\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="class\interface\switchIface.h">
+      <Filter>class\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="class\layer\layer2.h">
+      <Filter>class\layer</Filter>
+    </ClInclude>
+    <ClInclude Include="class\layer\layer3.h">
+      <Filter>class\layer</Filter>
+    </ClInclude>
+    <ClInclude Include="class\layer\layer4.h">
+      <Filter>class\layer</Filter>
+    </ClInclude>
+    <ClInclude Include="class\layer\layer5.h">
+      <Filter>class\layer</Filter>
+    </ClInclude>
+    <ClInclude Include="class\logger.h">
+      <Filter>class</Filter>
+    </ClInclude>
+    <ClInclude Include="class\pcapWriter.h">
+      <Filter>class</Filter>
+    </ClInclude>
+    <ClInclude Include="class\protocol.h">
+      <Filter>class</Filter>
+    </ClInclude>
+    <ClInclude Include="class\router\router.h">
+      <Filter>class\router</Filter>
+    </ClInclude>
+    <ClInclude Include="class\stopThread.h">
+      <Filter>class</Filter>
+    </ClInclude>
+    <ClInclude Include="class\switch\switch.h">
+      <Filter>class\switch</Filter>
+    </ClInclude>
+    <ClInclude Include="class\table\dhcpTable.h">
+      <Filter>class\table</Filter>
+    </ClInclude>
+    <ClInclude Include="class\table\macTable.h">
+      <Filter>class\table</Filter>
+    </ClInclude>
+    <ClInclude Include="class\table\routingTable.h">
+      <Filter>class\table</Filter>
+    </ClInclude>
+    <ClInclude Include="class\tscircularptrqueue.h">
+      <Filter>class</Filter>
+    </ClInclude>
+    <ClInclude Include="class\tscircularqueue.h">
+      <Filter>class</Filter>
+    </ClInclude>
+    <ClInclude Include="class\utils.h">
+      <Filter>class</Filter>
+    </ClInclude>
+    <ClInclude Include="testSTP.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="test.cpp" />
+  </ItemGroup>
+</Project>

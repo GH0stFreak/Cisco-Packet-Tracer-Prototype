@@ -21,10 +21,13 @@ uint8_t Router::counter = 0;
 uint8_t Dhcp::counter = 0;
 
 std::shared_ptr<spdlog::sinks::stderr_color_sink_mt> Loggable::consoleSink = std::make_shared<spdlog::sinks::stderr_color_sink_mt>();
+std::shared_ptr<spdlog::sinks::basic_file_sink_mt> Loggable::fileSink = std::make_shared<spdlog::sinks::basic_file_sink_mt>("network.log", true);
 
 int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ PWSTR pCmdLine, _In_ int nCmdShow)
 {
-
+		FILE* fp;
+		freopen_s(&fp, "console_output.txt", "w", stdout);
+		freopen_s(&fp, "console_output.txt", "w", stderr);
 
 	mainWindowClass.lpfnWndProc = MainWindowProc;
 	mainWindowClass.hInstance = hInstance;

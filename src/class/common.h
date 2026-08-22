@@ -50,6 +50,7 @@
 #include <spdlog\sinks\base_sink.h>
 #include <spdlog\pattern_formatter.h>
 #include <spdlog\sinks\stdout_color_sinks.h>
+#include <spdlog\sinks\basic_file_sink.h>
 
 int is_little_endian() {
     unsigned int i = 1;

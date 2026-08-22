@@ -2,9 +2,9 @@
 #ifndef ROUTERIFACE_H
 #define ROUTERIFACE_H
 #include "interface.h"
-//#include "..\layer3\layer3.h"
+//#include "..\layer\layer3.h"
 #include "..\arpCache\arpCache.h"
-#include "..\routingTable\routingTable.h"
+#include "..\table\routingTable.h"
 #include "..\pcapWriter.h"
 
 template <typename QueueType, typename BufferType>

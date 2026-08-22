@@ -1,8 +1,8 @@
 #pragma once
 #ifndef LAYER5_H
 #define LAYER5_H
-#include "..\layer4\layer4.h"
-#include "..\dhcpTable\dhcpTable.h"
+#include "..\layer\layer4.h"
+#include "..\table\dhcpTable.h"
 
 struct DhcpNetworkEntry;
 class DhcpNetworkTable;
